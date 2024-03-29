@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const HeroSection = ({ props }) => {
     return (
-        <div className='flex flex-col md:flex-row bg-gray-900 py-5'>
+        <div className='flex flex-col md:flex-row bg-[#eeeeee] py-5 items-center'>
             <div className='flex flex-col justify-center left bg-black text-white border-4 rounded-xl mx-6 my-0.5 p-7'>
                 <div>
                     <span className='text-xl'>{props.span}</span>
@@ -16,7 +16,7 @@ const HeroSection = ({ props }) => {
             </div>
             <div className='right border-4 rounded-xl mx-6 mt-4 md:mt-0 md:mr-8'>
                 <figure>
-                    <img className='rounded-xl' src="/src/assets/house2.jpg" alt="display-img" />
+                    <img className='rounded-xl max-w-80 ' src="/src/assets/house2.jpg" alt="display-img" />
                 </figure>
             </div>
         </div>

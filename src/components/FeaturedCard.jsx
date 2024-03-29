@@ -3,17 +3,17 @@ import { FaRegHeart } from 'react-icons/fa'
 
 const FeaturedCard = ({ title, imgSrc, details }) => {
     return (
-        <div className='featured-item bg-gray-600 border-2 border-black px-5 py-4 my-3 rounded-2xl'>
-            <div className='title mb-2 bg-gray-800 px-3 py-2 rounded-xl'>
-                <span className='font-bold text-gray-200 text-xl'>{title}</span>
+        <div className='featured-item bg-[#76ABAE] border-2 border-[#222831] px-5 py-4 my-3 rounded-2xl'>
+            <div className='title flex justify-center mb-2 bg-[#31363F] px-3 py-2 rounded-xl'>
+                <span className='font-bold text-[#EEEEEE] text-xl text-cv'>{title}</span>
             </div>
             <div className='img-area my-1 w-full'>
-                <img className='h-56 m-0.5 rounded-xl w-full' src={imgSrc} alt='image' />
-            </div>
+                <img className='h-56 m-0.5 rounded-xl w-full' src={imgSrc} alt='Primary property image' />
+            </div> 
             <div className='details my-2'>
                 <div className='info my-2 flex justify-around items-center'>
                     {details.map((detail, index) => {
-                        return <button key={index} className='bg-gray-800 text-zinc-300 font-semibold rounded-lg px-2 md:px-4 py-2 m-1'>{detail}</button>
+                        return <div key={index} className='bg-[#31363F] text-[#eeeeee] font-semibold rounded-lg px-4 py-2 m-1'>{detail}</div>
                     })}
                 </div>
                 <div className='btns my-1 flex justify-between items-center'>
