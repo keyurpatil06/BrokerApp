@@ -4,14 +4,15 @@ import reducer from '../reducer/listingsReducer'
 
 export const listingsContext = createContext()
 
-// const API = "https://api.pujakaitem.com/api/products"
 const API = "http://localhost:3000/generate";
 
 const initialState = {
     isLoading: false,
     isError: false,
     listings: [],
-    featureListings: []
+    featureListings: [],
+    isSingleLoading: false,
+    singleListing: {}
 }
 
 const ListingsProvider = ({ children }) => {
@@ -29,12 +30,23 @@ const ListingsProvider = ({ children }) => {
         }
     }
 
+    const getSingleProduct = async (url) => {
+        dispatch({ type: "SET_SINGLE_LOADING" })
+        try {
+            const res = await axios.get(url)
+            const singleListing = await res.data
+            dispatch({ type: "SET_SINGLE_LISTING", payload: singleListing })
+        } catch (error) {
+            dispatch({ type: "SET_SINGLE_ERROR" })
+        }
+    }
+
     useEffect(() => {
         getProducts(API)
     }, [])
 
     return (
-        <listingsContext.Provider value={{ ...state }}>
+        <listingsContext.Provider value={{ ...state, getSingleProduct, getProducts }}>
             {children}
         </listingsContext.Provider>
     )

@@ -39,7 +39,7 @@ const Home = () => {
         <h1 className='text-3xl font-bold text-center my-3'>Featured Listings</h1>
         <div className='featured-items p-3 flex justify-around flex-wrap'>
           {featureListings.map((item, index) => {
-            return <FeaturedCard key={index} title={item.title} imgSrc={item.imgSrc} details={item.details} />
+            return <FeaturedCard key={index} id={item.listingID} title={item.title} imgSrc={item.imgSrc} details={item.details} />
           })}
         </div>
       </div>

@@ -9,6 +9,7 @@ import Cart from './components/Cart'
 import Footer from './components/Footer'
 import ErrorPage from './components/ErrorPage'
 import ListingsProvider from './context/context'
+import SinglePage from './components/SinglePage'
 
 function App() {
   const router = createBrowserRouter([
@@ -31,6 +32,10 @@ function App() {
     {
       path: "/cart",
       element: <><Navbar /><Cart /><Footer /></>
+    },
+    {
+      path: "/singleListing/:id",
+      element: <><Navbar /><SinglePage /><Footer /></>
     },
     {
       path: "*",

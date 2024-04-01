@@ -1,12 +1,15 @@
 import mongoose from 'mongoose'
 
 const listingsSchema = new mongoose.Schema({
+    listingID: String,
     title: String,
-    imgSrc: String,
+    imgSrc: [String],
     details: [String],
     price: Number,
     size: Number,
     rooms: Number,
+    bathrooms: String,
+    apartmentName: String,
     parking: Boolean,
     featured: Boolean
 })

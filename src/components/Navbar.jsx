@@ -28,7 +28,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='flex justify-around items-center bg-black text-white h-[4.5rem] flex-col md:flex-row'>
+        <nav className='flex justify-around items-center bg-black text-white h-[5rem] flex-col md:flex-row'>
             <div className="logo py-6">
                 <span className='font-bold border-2 px-3 py-1 text-2xl'>Broker App</span>
 
@@ -39,7 +39,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <ul className={`absolute top-[4.5rem] md:static md:flex w-full md:w-fit items-center flex-col md:flex-row justify-start bg-[#374151b3] md:bg-black ${isNavOpen ? 'flex' : 'hidden'}`}>
+            <ul className={`absolute top-[5rem] md:static md:flex w-full md:w-fit items-center flex-col md:flex-row justify-start bg-[#374151b3] md:bg-black ${isNavOpen ? 'flex' : 'hidden'}`}>
                 {links.map((item, index) => {
                     return <li className='nav-btns' key={index}>
                         <NavLink className={(e) => { return e.isActive ? 'selected' : '' }} to={item.to}>{item.link}</NavLink>
