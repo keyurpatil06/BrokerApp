@@ -2,7 +2,7 @@ import React from 'react'
 import { FaRegHeart } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
 
-const FeaturedCard = ({ id, title, imgSrc, details }) => {
+const FeaturedCard = ({ id, title, mainImgSrc, details }) => {
     return (
         <NavLink to={`/singleListing/${id}`} >
             <div className='featured-item bg-gray-600 border-2 border-black px-5 py-4 my-3 rounded-2xl'>
@@ -10,7 +10,7 @@ const FeaturedCard = ({ id, title, imgSrc, details }) => {
                     <span className='font-bold text-gray-200 text-xl'>{title}</span>
                 </div>
                 <div className='img-area my-1 w-full'>
-                    <img className='h-56 m-0.5 rounded-xl w-full' src={imgSrc} alt='image' />
+                    <img className='h-56 m-0.5 rounded-xl w-full' src={mainImgSrc} alt='image' />
                 </div>
                 <div className='details my-2'>
                     <div className='info my-2 flex justify-around items-center'>

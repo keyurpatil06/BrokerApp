@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 const listingsSchema = new mongoose.Schema({
     listingID: String,
     title: String,
-    imgSrc: [String],
+    mainImgSrc: String,
+    otherImgs: [String],
     details: [String],
     price: Number,
     size: Number,
