@@ -69,7 +69,7 @@ app.get('/generate', async (req, res) => {
                     rooms: getRandom(Rooms),
                     bathrooms: getRandom(Bathrooms),
                     apartmentName: getRandom(Apartment),
-                    parking: getRandom(Booleans),
+                    parking: Math.random() * 10 > 5 ? true : false,
                     featured: isFeatured
                 });
 
