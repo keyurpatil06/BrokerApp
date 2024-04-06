@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import SearchSection from './SearchSection'
-import FeaturedCard from './FeaturedCard'
-import HeroSection from './HeroSection';
+import SearchSection from '../components/SearchSection'
+import FeaturedCard from '../components/FeaturedCard'
+import HeroSection from '../components/HeroSection';
 import { listingsContext } from '../context/context';
 
 const Home = () => {
@@ -39,7 +39,8 @@ const Home = () => {
         <h1 className='text-3xl font-bold text-center my-3'>Featured Listings</h1>
         <div className='featured-items p-3 flex justify-around flex-wrap'>
           {featureListings.map((item, index) => {
-            return <FeaturedCard key={index} id={item.listingID} title={item.title} mainImgSrc={item.mainImgSrc} details={item.details} />
+            // return <FeaturedCard key={index} id={item.listingID} title={item.title} price={item.price} mainImgSrc={item.mainImgSrc} details={item.details} />
+            return <FeaturedCard key={index} item={item} />
           })}
         </div>
       </div>

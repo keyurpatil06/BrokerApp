@@ -9,7 +9,7 @@ const listingsSchema = new mongoose.Schema({
     price: Number,
     size: Number,
     rooms: Number,
-    bathrooms: String,
+    bathrooms: Number,
     apartmentName: String,
     parking: Boolean,
     featured: Boolean

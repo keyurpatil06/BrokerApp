@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 let getRandom = (arr) => {
-    let rno = Math.floor(Math.random() * (arr.length - 1));
+    let rno = Math.floor(Math.random() * (arr.length));
     return arr[rno];
 }
 
@@ -38,10 +38,9 @@ app.get('/generate', async (req, res) => {
             const Sizes = [1000, 1500, 2000, 2500, 3000]
             const Rooms = [1, 2, 3, 4, 5]
             const Bathrooms = [1, 2, 3, 4, 5]
-            const Images = ['src/assets/house.jpg', 'src/assets/house2.jpg', 'src/assets/house3.jpg']
+            const Images = ['src/assets/house2.jpg', 'src/assets/house3.jpg', 'src/assets/house4.jpg', 'src/assets/house5.jpg']
             const Apartment = ["Apartment A", "Apartment B", "Apartment C", "Apartment D", "Apartment E"]
             const Facilities = ["2 BHK", "Parking", "Facility 1", "Facility 2", "Facility 3"]
-            const Booleans = [true, false]
 
             let createdListings = []
             let featuredCount = 0
@@ -56,7 +55,7 @@ app.get('/generate', async (req, res) => {
                 let data = await listings.create({
                     listingID: uuidv4(),
                     title: getRandom(Titles),
-                    mainImgSrc: Images[0],
+                    mainImgSrc: getRandom(Images),
                     otherImgs: Images,
                     details: [
                         getRandom(Facilities),

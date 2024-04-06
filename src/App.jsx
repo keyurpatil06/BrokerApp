@@ -1,15 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar'
-import Home from './components/Home'
+import Home from './pages/Home'
+import Contact from './pages/Contact'
+import About from './pages/About'
 import Listings from './components/Listings'
-import About from './components/About'
-import Contact from './components/Contact'
+import SinglePage from './components/SinglePage'
 import Cart from './components/Cart'
 import Footer from './components/Footer'
 import ErrorPage from './components/ErrorPage'
 import ListingsProvider from './context/context'
-import SinglePage from './components/SinglePage'
+import { FilterContextProvider } from './context/Filter_context'
+import { CartContextProvider } from './context/Cart_context'
 
 function App() {
   const router = createBrowserRouter([
@@ -46,7 +48,11 @@ function App() {
   return (
     <>
       <ListingsProvider>
-        <RouterProvider router={router} />
+        <FilterContextProvider>
+          <CartContextProvider>
+            <RouterProvider router={router} />
+          </CartContextProvider>
+        </FilterContextProvider>
       </ListingsProvider>
     </>
   )

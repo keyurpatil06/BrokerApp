@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import HeroSection from './HeroSection'
+import HeroSection from '../components/HeroSection'
 
 const About = () => {
   const data = {
