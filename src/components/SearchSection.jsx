@@ -2,12 +2,12 @@ import React from 'react'
 import { useFilterContext } from '../context/Filter_context'
 import { NavLink } from 'react-router-dom'
 
-const SearchSection = ({ height }) => {
+const SearchSection = ({ custom }) => {
 
   const { filters: { text }, updateFilterValue } = useFilterContext()
 
   return (
-    <div className={`search-section bg-gray-400 py-4 flex flex-col items-center justify-center ${height === 20 ? 'h-[20vh]' : 'h-[35vh]'}`}>
+    <div className={`search-section bg-gray-400 py-4 flex flex-col items-center justify-center ${custom ? 'h-[20vh] mx-[0.85rem] md:mx-3 rounded-xl mb-3 pt-0' : 'h-[35vh]'}`}>
       <h1 className='text-3xl font-bold text-center my-3'>Search From Here</h1>
       <form action='#' onSubmit={(e) => { e.preventDefault() }} className='search-area w-full flex justify-center items-center'>
         <input

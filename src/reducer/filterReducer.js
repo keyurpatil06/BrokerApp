@@ -14,9 +14,6 @@ const filterReducer = (state, action) => {
             }
 
         case "GET_SORT_VALUE":
-            // let userSortVal = document.getElementById("sort")
-            // let sort_val = userSortVal.options[userSortVal.selectedIndex].value
-            // console.log(sort_val)
             return {
                 ...state,
                 sorting_value: action.payload

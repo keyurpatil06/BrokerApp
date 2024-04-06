@@ -9,9 +9,9 @@ const About = () => {
   }
 
   return (
-    <>
+    <div className='h-[88vh] bg-gray-900 flex md:items-center'>
       <HeroSection props={data} />
-    </>
+    </div>
   )
 }
 

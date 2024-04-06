@@ -1,19 +1,19 @@
 const cartReducer = (state, action) => {
     switch (action.type) {
         case 'SHORTLIST':
-            // let { listingID, title, mainImgSrc, price } = action.payload
-            // console.log(listingID, title, mainImgSrc, price);
-
-            // let shortListedItem = {
-            //     listingID: listingID,
-            //     title: title,
-            //     mainImgSrc: mainImgSrc,
-            //     price: price
-            // }
-
             return {
                 ...state,
-                shortListedItems: [...state.shortListedItems, action.payload]  
+                totalSelectedListings: state.totalSelectedListings + 1,
+                shortListedItems: [...state.shortListedItems, action.payload]
+            }
+
+        case 'REMOVE_SHORTLIST':
+            return {
+                ...state,
+                totalSelectedListings: state.totalSelectedListings - 1,
+                shortListedItems: state.shortListedItems.filter((item) => {
+                    return item.listingID !== action.payload
+                })
             }
 
         default:
