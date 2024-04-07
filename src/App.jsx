@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Auth0Provider } from '@auth0/auth0-react';
 import './App.css'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -47,13 +48,20 @@ function App() {
 
   return (
     <>
-      <ListingsProvider>
-        <FilterContextProvider>
-          <CartContextProvider>
-            <RouterProvider router={router} />
-          </CartContextProvider>
-        </FilterContextProvider>
-      </ListingsProvider>
+      <Auth0Provider
+        domain='Enter Your Key'
+        clientId='Enter Your Key'
+        authorizationParams={{
+          redirect_uri: window.location.origin
+        }}>
+        <ListingsProvider>
+          <FilterContextProvider>
+            <CartContextProvider>
+              <RouterProvider router={router} />
+            </CartContextProvider>
+          </FilterContextProvider>
+        </ListingsProvider>
+      </Auth0Provider>
     </>
   )
 }

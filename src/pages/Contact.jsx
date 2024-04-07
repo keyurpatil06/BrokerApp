@@ -1,6 +1,9 @@
 import React from 'react'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Contact = () => {
+  const { user, isAuthenticated } = useAuth0()
+
   return (
     <div className='bg-gray-800 h-[88vh]'>
       <div className='p-3 bg-gray-900'>
@@ -10,8 +13,8 @@ const Contact = () => {
       <div className=' py-3 flex flex-col justify-center items-center'>
         <h2 className='text-2xl font-bold my-2 text-white'>Contact Us</h2>
         <form action='https://formspree.io/f/mbjnzeqq' method='post' className='flex flex-col items-start'>
-          <input className='inputStyle' type='text' placeholder='Enter your username' name='name' required autoComplete='off' />
-          <input className='inputStyle' type='text' placeholder='Enter your email' name='email' required autoComplete='off' />
+          <input className='inputStyle' type='text' value={isAuthenticated ? user.name : ''} name='name' required autoComplete='off' />
+          <input className='inputStyle' type='text' value={isAuthenticated ? user.email : ''} name='email' required autoComplete='off' />
           <textarea className='inputStyle' name='message' required autoComplete='off' placeholder='Enter your message'></textarea>
           <input className='px-3 py-2 bg-white text-black rounded-xl font-semibold mx-auto mt-1 mb-3 cursor-pointer' type='submit' value='Send' />
         </form>

@@ -5,7 +5,7 @@ const CartContext = createContext()
 
 const getLocalSavedData = () => {
     let data = localStorage.getItem('shortlist')
-    if (!data||data.length === 0) {
+    if (!data || data.length === 0) {
         return []
     } else {
         return JSON.parse(data)
@@ -14,7 +14,7 @@ const getLocalSavedData = () => {
 
 const getLocalSavedCount = () => {
     let data = localStorage.getItem('shortlistCount')
-    if (!data||data.length === 0) {
+    if (!data || data.length === 0) {
         return 0
     } else {
         return parseInt(JSON.parse(data))
@@ -31,7 +31,13 @@ export const CartContextProvider = ({ children }) => {
 
     const shortList = (item) => {
         dispatch({ type: "SHORTLIST", payload: item })
-        alert(`'${item.title}' added to shortlist items`)
+
+        let existingItem = state.shortListedItems.find((currItem) => currItem == item)
+        if (existingItem) {
+            alert(`'${item.title}' is already shortlisted`)
+        } else {
+            alert(`'${item.title}' added to shortlist items`)
+        }
     }
 
     const removeItem = (id, title) => {

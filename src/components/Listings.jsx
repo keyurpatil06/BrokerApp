@@ -1,13 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import FeaturedCard from './FeaturedCard'
-import { listingsContext } from '../context/context'
 import { useFilterContext } from '../context/Filter_context'
 import Sort from './Sort'
 import SearchSection from './SearchSection'
 import { FaAngleUp } from 'react-icons/fa'
 
 const Listings = () => {
-  // const { listings } = useContext(listingsContext)
   const { filter_listings } = useFilterContext()
 
   useEffect(() => {
@@ -25,7 +23,6 @@ const Listings = () => {
         </div>
         <div className='featured-items p-3 flex justify-around flex-wrap'>
           {filter_listings.length === 0 ? <p>No Listings Found</p> : filter_listings.map((item, index) => {
-            // return <FeaturedCard id={item.listingID} key={index} title={item.title} mainImgSrc={item.mainImgSrc} price={item.price} details={item.details} />
             return <FeaturedCard key={index} item={item} />
           })}
         </div>
