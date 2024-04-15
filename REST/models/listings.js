@@ -12,7 +12,9 @@ const listingsSchema = new mongoose.Schema({
     bathrooms: Number,
     apartmentName: String,
     parking: Boolean,
-    featured: Boolean
+    featured: Boolean,
+    listerName: String,
+    listerContact: String,
 })
 
 export const listings = mongoose.model('listings', listingsSchema)

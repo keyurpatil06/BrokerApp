@@ -13,6 +13,8 @@ import ErrorPage from './components/ErrorPage'
 import ListingsProvider from './context/context'
 import { FilterContextProvider } from './context/Filter_context'
 import { CartContextProvider } from './context/Cart_context'
+import Form from './components/Form';
+import { AuthContextProvider } from './context/AuthContext'
 
 function App() {
   const router = createBrowserRouter([
@@ -41,6 +43,10 @@ function App() {
       element: <><Navbar /><SinglePage /><Footer /></>
     },
     {
+      path: "/form",
+      element: <><Navbar /><Form /><Footer /></>
+    },
+    {
       path: "*",
       element: <><Navbar /><ErrorPage /><Footer /></>
     },
@@ -48,12 +54,7 @@ function App() {
 
   return (
     <>
-      <Auth0Provider
-        domain='Enter Your Key'
-        clientId='Enter Your Key'
-        authorizationParams={{
-          redirect_uri: window.location.origin
-        }}>
+      <AuthContextProvider>
         <ListingsProvider>
           <FilterContextProvider>
             <CartContextProvider>
@@ -61,7 +62,7 @@ function App() {
             </CartContextProvider>
           </FilterContextProvider>
         </ListingsProvider>
-      </Auth0Provider>
+      </AuthContextProvider>
     </>
   )
 }

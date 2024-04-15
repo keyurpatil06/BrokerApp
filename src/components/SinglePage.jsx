@@ -57,6 +57,17 @@ const SinglePage = () => {
                     <span className='textUtil'>{singleListing.bathrooms} Bathroom</span>
                     <span className={`${singleListing.parking ? 'bg-green-500' : 'bg-red-600'} textUtil2`}>Parking {singleListing.parking ? 'Available' : 'Unavailable'}</span>
                     <span className='textUtil'>Rs. <PriceFormat price={singleListing.price} /></span>
+                    <div className='textUtil flex flex-col items-center'>
+                        <h2 className='bg-slate-700 text-white w-fit text-center mx-auto px-3 py-1 font-semibold rounded-lg'>Contact Information</h2>
+                        <div className='bg-gray-400 px-3 py-1 rounded-xl border-2 border-black mt-2 flex flex-col justify-start w-fit items-start'>
+                            <span>
+                                <span className='font-bold text-black'>Name:</span> {singleListing.listerName}
+                            </span>
+                            <span>
+                                <span className='font-bold text-black'>Contact Number:</span> {singleListing.listerContact}
+                            </span>
+                        </div>
+                    </div>
                     <button onClick={() => { shortList(singleListing) }} className='bg-slate-900 px-3 py-2 my-3 flex justify-center items-center w-fit rounded-xl'>
                         <FaRegHeart className='text-red-600' /><span className='mx-2 font-bold'>Shortlist</span>
                     </button>

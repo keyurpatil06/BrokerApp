@@ -41,6 +41,8 @@ app.get('/generate', async (req, res) => {
             const Images = ['src/assets/house2.jpg', 'src/assets/house3.jpg', 'src/assets/house4.jpg', 'src/assets/house5.jpg']
             const Apartment = ["Apartment A", "Apartment B", "Apartment C", "Apartment D", "Apartment E"]
             const Facilities = ["2 BHK", "Parking", "Facility 1", "Facility 2", "Facility 3"]
+            const listerName = ['John Doe', 'Jane Smith', 'Michael Johnson', 'Emily Brown', 'David Wilson', 'Sarah Miller'];
+            const listerContact = [1234567890, 9876543210, 5555555555, 1111111111, 2222222222, 3333333333];
 
             let createdListings = []
             let featuredCount = 0
@@ -69,7 +71,9 @@ app.get('/generate', async (req, res) => {
                     bathrooms: getRandom(Bathrooms),
                     apartmentName: getRandom(Apartment),
                     parking: Math.random() * 10 > 5 ? true : false,
-                    featured: isFeatured
+                    featured: isFeatured,
+                    listerName: getRandom(listerName),
+                    listerContact: getRandom(listerContact)
                 });
 
                 createdListings.push(data);
@@ -82,6 +86,37 @@ app.get('/generate', async (req, res) => {
         }
     }
 })
+
+app.post('/uploadListing', async (req, res) => {
+    const {
+        title,
+        price,
+        size,
+        rooms,
+        bathrooms,
+        apartmentName,
+        parking,
+    } = req.body;
+
+    try {
+        const data = await listings.create({
+            listingID: uuidv4(),
+            title,
+            price,
+            size,
+            rooms,
+            bathrooms,
+            apartmentName,
+            parking,
+        });
+        res.send(data.toArray());
+        console.log('Listing uploaded successfully:', data);
+    } catch (error) {
+        console.error('Error uploading listing:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

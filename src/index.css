@@ -25,3 +25,11 @@
 .textUtil2 {
     @apply w-full text-center py-2 border-y-[1px];
 }
+
+.formInput {
+    @apply bg-slate-700 text-white placeholder:text-gray-400 placeholder:font-semibold outline-0 my-2 p-3 rounded-xl font-normal;
+}
+
+.inputLabel {
+    @apply m-2 font-bold;
+}
