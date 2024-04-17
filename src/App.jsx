@@ -14,7 +14,6 @@ import ListingsProvider from './context/context'
 import { FilterContextProvider } from './context/Filter_context'
 import { CartContextProvider } from './context/Cart_context'
 import Form from './components/Form';
-import { AuthContextProvider } from './context/AuthContext'
 
 function App() {
   const router = createBrowserRouter([
@@ -54,7 +53,10 @@ function App() {
 
   return (
     <>
-      <AuthContextProvider>
+      <Auth0Provider
+        domain="dev-t03s3ap1xtkiwx4v.us.auth0.com"
+        clientId="riL3rezD1sbSpZKTNmTQKLEIn2Q7waC8"
+        authorizationParams={{ redirect_uri: window.location.origin }}>
         <ListingsProvider>
           <FilterContextProvider>
             <CartContextProvider>
@@ -62,7 +64,7 @@ function App() {
             </CartContextProvider>
           </FilterContextProvider>
         </ListingsProvider>
-      </AuthContextProvider>
+      </Auth0Provider>
     </>
   )
 }

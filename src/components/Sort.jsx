@@ -19,7 +19,7 @@ const Sort = () => {
     const bathroomsData = getUniqueData(all_listings, 'bathrooms')
 
     return (
-        <div className='filter-selection text-black p-3 my-6 md:my-0 text-center sticky top-0'>
+        <div className='filter-selection text-black p-3 my-6 md:my-0 text-center sticky top-[5.5rem] z-0'>
             <form action='#'>
                 <label htmlFor='sort'></label>
                 <select name='sort' id='sort' onClick={sorting} className='bg-black text-white px-2 py-1.5 rounded-lg outline-none'>

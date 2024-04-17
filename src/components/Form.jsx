@@ -11,7 +11,7 @@ const Form = () => {
         title: '',
         // mainImgSrc: String,
         // otherImgs: [String],
-        // details: [String],
+        details: [],
         price: 0,
         size: 0,
         rooms: 0,
@@ -21,10 +21,11 @@ const Form = () => {
         featured: false,
         listerName: '',
         listerContact: '',
+        otherImgs: [],
     })
 
-    const [formArray, setFormArray] = useState([])
-    const [selectedFile, setSelectedFile] = useState(null)
+    // const [formArray, setFormArray] = useState([])
+    // const [selectedFile, setSelectedFile] = useState(null)
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -33,24 +34,50 @@ const Form = () => {
     }
 
     const handleFileChange = (e) => {
-
+        const files = Array.from(e.target.files);
+        setForm({ ...form, otherImgs: files });
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    }
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     // setForm({ ...form, listingID: uuidv4() })
+    //     console.log(form);
 
-    const saveListingToDB = async () => {
-        setForm({ ...form, listingID: uuidv4() })
-        // setFormArray([...formArray, { ...form, listingID: uuidv4() }])
-        await fetch("http://localhost:3000/uploadListing", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: form
-        })
-    }
+    //     try {
+    //         const response = await axios.post('http://localhost:3000/uploadListing', form);
+    //         console.log('Listing uploaded successfully:', response.data);
+    //     } catch (error) {
+    //         console.error('Error uploading listing:', error);
+    //     }
+    // };
 
-    // console.log(formArray);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const formData = new FormData();
+            formData.append('title', form.title);
+            formData.append('details', form.details);
+            formData.append('price', form.price);
+            formData.append('size', form.size);
+            formData.append('rooms', form.rooms);
+            formData.append('bathrooms', form.bathrooms);
+            formData.append('apartmentName', form.apartmentName);
+            formData.append('parking', form.parking);
+            formData.append('featured', form.featured);
+            formData.append('listerName', form.listerName);
+            formData.append('listerContact', form.listerContact);
+            formData.append('otherImgs', form.otherImgs);
+
+            // form.images.forEach((image, index) => {
+            //     formData.append(`images${index}`, image);
+            // });
+
+            const response = await axios.post('http://localhost:3000/uploadListing', formData);
+            console.log('Listing uploaded successfully:', response.data);
+        } catch (error) {
+            console.error('Error uploading listing:', error);
+        }
+    }
 
     return (
         <div className='bg-slate-600 lg:h-screen text-black p-4 flex flex-col items-center'>
@@ -76,20 +103,22 @@ const Form = () => {
                 <label htmlFor="parking" className='font-bold accent-green-600'>Parking Available:
                     <input className='mx-2' placeholder='parking' type='checkbox' name='parking' id='parking' checked={form.parking} onChange={handleChange} />
                 </label>
-                <input className='formInput' placeholder='Enter ' type='file' name='file' multiple onChange={handleFileChange} />
-                {/* --make a input for details here-- */}
+                <input className='formInput' type="file" name="otherImgs" accept="image/*" multiple onChange={handleFileChange} />
+                <input className='formInput' placeholder='Enter details(comma seperated - Any 4)' type='text' name='details' value={form.details} onChange={handleChange} />
 
                 <h2 className='text-xl font-bold'>Contact Information</h2>
                 <input className='formInput' placeholder='Enter your name' type='text' name='listerName' value={form.listerName} onChange={handleChange} />
                 <input className='formInput' placeholder='Enter your phone number' type='text' name='listerContact' value={form.listerContact} onChange={handleChange} />
 
-                {isAuthenticated ?
+                {/* {isAuthenticated ?
                     <button className='bg-black text-white mt-3 w-fit px-8 py-2 text-xl rounded-xl mx-auto' type='submit'>Submit</button> :
                     <button onClick={() => loginWithRedirect()} className='text-xl text-white font-semibold bg-green-700 w-fit px-6 py-2 mt-2 mx-auto rounded-xl'>Sign In to add a free listing!</button>
-                }
+                } */}
+                <button className='bg-black text-white mt-3 w-fit px-8 py-2 text-xl rounded-xl mx-auto' type='submit'>Submit</button>
             </form>
         </div>
     )
 }
 
 export default Form
+// https://www.youtube.com/watch?v=ijx0Uqlo3NA

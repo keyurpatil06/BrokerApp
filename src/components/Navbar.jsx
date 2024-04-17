@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { FaRegHeart } from "react-icons/fa";
 import { NavLink } from 'react-router-dom'
-// import { useAuth0 } from "@auth0/auth0-react";
-import { signInWithPopup, GoogleAuthProvider, getRedirectResult, signInWithRedirect } from 'firebase/auth'
-import { auth } from '../firebase'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-    // const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
     const links = [
         { to: '/', link: 'Home' },
@@ -32,29 +30,8 @@ const Navbar = () => {
         })
     }
 
-    // const handleLogin = (e) => {
-    //     e.preventDefault()
-
-    //     signInWithPopup(auth, new GoogleAuthProvider);
-    // }
-
-    useEffect(() => {
-        getRedirectResult(auth).then(response => {
-            if (!response) return
-
-            // Your code here
-        }).catch(error => {
-            console.error(error);
-        })
-    }, []);
-
-
-    const handleLogin = async () => {
-        await signInWithPopup(auth, new GoogleAuthProvider)
-    }
-
     return (
-        <nav className='flex justify-around items-center bg-black text-white h-[5rem] flex-col md:flex-row'>
+        <nav className='flex justify-around items-center bg-black text-white h-[5rem] flex-col md:flex-row fixed top-0 w-full z-50'>
             <div className="logo py-6">
                 <span className='font-bold border-2 px-3 py-1 text-2xl'>Broker App</span>
 
@@ -65,8 +42,6 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* {isAuthenticated && <p className='font-semibold px-2 py-1 mt-4 md:m-0 rounded-xl text-xl bg-gray-200 text-black'>{`Hello, ${user.name}!`}</p>} */}
-
             <ul className={`absolute top-[5rem] md:static md:flex w-full md:w-fit items-center flex-col md:flex-row justify-start bg-[#374151b3] md:bg-black ${isNavOpen ? 'flex' : 'hidden'}`}>
                 {links.map((item, index) => {
                     return <li className='nav-btns' key={index}>
@@ -74,18 +49,13 @@ const Navbar = () => {
                     </li>
                 })}
                 <li className='nav-btns'>
-                    <button onClick={handleLogin}>
-                        Log in
-                    </button>
-                </li>
-                {/* <li className='nav-btns'>
                     {isAuthenticated ?
                         <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
                             Log Out
                         </button> :
                         <button onClick={() => loginWithRedirect()}>Log In</button>
                     }
-                </li> */}
+                </li>
             </ul>
         </nav>
     )

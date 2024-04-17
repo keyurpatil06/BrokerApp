@@ -14,7 +14,7 @@ const Listings = () => {
 
   return (
     <div className='bg-gray-500 text-white pt-3' >
-      <h1 className='text-3xl font-bold text-center mx-3 mb-3 p-3 bg-slate-800 rounded-xl'>Browse different properties</h1>
+      <h1 className='text-3xl font-bold text-center mx-3 mb-3 mt-[5.5rem] p-3 bg-slate-800 rounded-xl'>Browse different properties</h1>
       <button className='fixed bottom-3 right-3 bg-black p-3 rounded-xl opacity-70' onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}><FaAngleUp className='text-white' /></button>
       <SearchSection custom={true} />
       <div className='main-container md:flex'>

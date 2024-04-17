@@ -3,10 +3,15 @@ import mongoose from 'mongoose';
 import cors from 'cors'
 import { v4 as uuidv4 } from 'uuid';
 import { listings } from './models/listings.js';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
 
 const app = express()
 const port = 3000
-await mongoose.connect('mongodb://localhost:27017/listings')
+mongoose.connect('mongodb://localhost:27017/listings')
+
+app.use(express.json())
 app.use(cors())
 
 app.get('/', (req, res) => {
@@ -87,36 +92,50 @@ app.get('/generate', async (req, res) => {
     }
 })
 
+// Upload endpoint with file upload middleware
 app.post('/uploadListing', async (req, res) => {
     const {
         title,
+        details,
         price,
         size,
         rooms,
         bathrooms,
         apartmentName,
         parking,
+        featured,
+        listerName,
+        listerContact,
+        otherImgs
     } = req.body;
 
     try {
-        const data = await listings.create({
+        const listing = listings.create({
             listingID: uuidv4(),
             title,
+            details: details ? details.split(',').map((item) => item.trim()) : [],
             price,
             size,
             rooms,
             bathrooms,
             apartmentName,
             parking,
-        });
-        res.send(data.toArray());
-        console.log('Listing uploaded successfully:', data);
+            featured,
+            listerName,
+            listerContact,
+            // mainImgSrc: otherImgs,
+            otherImgs,
+        })
+        console.log(otherImgs);
+
+        await listing.save();
+        console.log('Listing uploaded successfully:', listing);
+        res.send('Listing uploaded successfully');
     } catch (error) {
         console.error('Error uploading listing:', error);
         res.status(500).send('Internal Server Error');
     }
-});
-
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

@@ -29,7 +29,7 @@ const SinglePage = () => {
 
     return (
         <>
-            <div className='listing-area lg:flex h-screen bg-gray-500'>
+            <div className='listing-area lg:flex h-screen bg-gray-500 mt-[5rem]'>
                 <div className='image-area flex flex-col-reverse lg:flex-row min-w-[60vw]'>
                     <div className='side-imgs p-4 bg-gray-500 flex lg:flex-col justify-center'>
                         {singleListing.otherImgs && singleListing.otherImgs.map((item, index) => {

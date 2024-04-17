@@ -9,7 +9,7 @@ const About = () => {
   }
 
   return (
-    <div className='h-[88vh] bg-gray-900 flex md:items-center'>
+    <div className='h-[88vh] mt-[5rem] bg-gray-900 flex md:items-center'>
       <HeroSection props={data} />
     </div>
   )
