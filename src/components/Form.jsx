@@ -33,10 +33,37 @@ const Form = () => {
         setForm({ ...form, [name]: newValue })
     }
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         const files = Array.from(e.target.files);
-        setForm({ ...form, otherImgs: files });
-    }
+        const filePromises = files.map((file) => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = (error) => reject(error);
+            });
+        });
+        
+        try {
+            const base64Images = await Promise.all(filePromises);
+            // console.log(base64Images);
+            setForm({ ...form, otherImgs: base64Images });
+        } catch (error) {
+            console.error('Error reading files:', error);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(form);
+
+        try {
+            const response = await axios.post('http://localhost:3000/uploadListing', form);
+            console.log('Listing uploaded successfully:', response.data);
+        } catch (error) {
+            console.error('Error uploading listing:', error);
+        }
+    };
 
     // const handleSubmit = async (e) => {
     //     e.preventDefault();
@@ -51,33 +78,33 @@ const Form = () => {
     //     }
     // };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const formData = new FormData();
-            formData.append('title', form.title);
-            formData.append('details', form.details);
-            formData.append('price', form.price);
-            formData.append('size', form.size);
-            formData.append('rooms', form.rooms);
-            formData.append('bathrooms', form.bathrooms);
-            formData.append('apartmentName', form.apartmentName);
-            formData.append('parking', form.parking);
-            formData.append('featured', form.featured);
-            formData.append('listerName', form.listerName);
-            formData.append('listerContact', form.listerContact);
-            formData.append('otherImgs', form.otherImgs);
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         const formData = new FormData();
+    //         formData.append('title', form.title);
+    //         formData.append('details', form.details);
+    //         formData.append('price', form.price);
+    //         formData.append('size', form.size);
+    //         formData.append('rooms', form.rooms);
+    //         formData.append('bathrooms', form.bathrooms);
+    //         formData.append('apartmentName', form.apartmentName);
+    //         formData.append('parking', form.parking);
+    //         formData.append('featured', form.featured);
+    //         formData.append('listerName', form.listerName);
+    //         formData.append('listerContact', form.listerContact);
+    //         formData.append('otherImgs', form.otherImgs);
 
-            // form.images.forEach((image, index) => {
-            //     formData.append(`images${index}`, image);
-            // });
+    //         // form.images.forEach((image, index) => {
+    //         //     formData.append(`images${index}`, image);
+    //         // });
 
-            const response = await axios.post('http://localhost:3000/uploadListing', formData);
-            console.log('Listing uploaded successfully:', response.data);
-        } catch (error) {
-            console.error('Error uploading listing:', error);
-        }
-    }
+    //         const response = await axios.post('http://localhost:3000/uploadListing', formData);
+    //         console.log('Listing uploaded successfully:', response.data);
+    //     } catch (error) {
+    //         console.error('Error uploading listing:', error);
+    //     }
+    // }
 
     return (
         <div className='bg-slate-600 lg:h-screen text-black p-4 flex flex-col items-center'>

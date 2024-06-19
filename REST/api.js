@@ -11,8 +11,8 @@ const app = express()
 const port = 3000
 mongoose.connect('mongodb://localhost:27017/listings')
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json({ limit: "50mb" }))
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -92,6 +92,9 @@ app.get('/generate', async (req, res) => {
     }
 })
 
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage: storage });
+
 // Upload endpoint with file upload middleware
 app.post('/uploadListing', async (req, res) => {
     const {
@@ -109,8 +112,10 @@ app.post('/uploadListing', async (req, res) => {
         otherImgs
     } = req.body;
 
+    // const base64Images = req.files.map((file) => file.buffer.toString('base64'));
+
     try {
-        const listing = listings.create({
+        const listing = new listings({
             listingID: uuidv4(),
             title,
             details: details ? details.split(',').map((item) => item.trim()) : [],
